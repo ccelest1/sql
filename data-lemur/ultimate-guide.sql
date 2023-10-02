@@ -26,10 +26,10 @@ group by parts_assembly.id;
     difference = aggregate function
         month of highest issuance
             month
-            where issued_amount == max(issued_amount)
+            where issued_amount = max(issued_amount)
         month of lowest issuance
             month
-            where issued_amount == min(issued_amount)
+            where issued_amount = min(issued_amount)
 */
 -- solution
 SELECT card_name, max(issued_amount) - min(issued_amount)
@@ -82,7 +82,7 @@ left join products p
 --(2) count all distinct product categories a customer has purchhased product from i.e. remove duplicates
 -- can only group by with cols specified in select line
 SELECT cc.customer_id,
-    COUNT(DISTINCT(p.product_category) as unique_count
+    COUNT(DISTINCT p.product_category) as unique_count
 FROM customer_contracts cc
 left join products p
     on cc.product_id = products.product_id
@@ -115,17 +115,17 @@ group by customers.customer_id;
     JOIN
         RevenueCTE ON Orders.OrderID = RevenueCTE.OrderID
 */
+
 -- cte [ returns count of distinct product categories a customer has purchased a product from ]
 with supercloud as (
     SELECT cc.customer_id,
-        count(DISTINCT p.product_category) as unique_count
+        count(DISTINCT (p.product_category) as unique_count
     FROM customer_contracts as cc
     left join products as p
     on cc.product_id = p.product_id
-    GROUP BY cc.customer_id
+    GROUP BY cc.customer_id;
 )
 
--- [ select only users who have products from all categories ]  -> filter for unique_count of 3 (3 prod categories) -> make it dynamic with subquery ref products table
 
 select customer_id
 from supercloud
@@ -134,6 +134,11 @@ where unique_count = (
   from products
 )
 order by customer_id
+
+/*
+^^
+[ select only users who have products from all categories ]  -> filter for unique_count of 3 (3 prod categories) -> make it dynamic with subquery ref products table
+*/
 
 -- 4 various joins tested in sql assessments
 /*
@@ -175,17 +180,6 @@ order by customer_id
     where texts.action_data = emails.signup_date + INTERVAL '1 day'
 */
 
-
-/*
-    Approaching SQL Interview Question
-
-    (1) understand question
-    (2) id relevant info
-    (3) break down problem
-    (3) consider edge cases
-    (5) write queries to answer sub-probs
-    (6) test final query
-*/
 
 /*
 - how to perform percentages -

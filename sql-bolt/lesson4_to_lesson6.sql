@@ -104,7 +104,7 @@ limit 2 offset 2;
 
 --- inner join example
 SELECT column, other_col
-FROM mtybale
+FROM mytable
 INNER JOIN other_table
     ON mytable.id = other_table.id
 WHERE condition(s)

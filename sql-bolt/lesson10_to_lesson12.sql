@@ -124,7 +124,7 @@ FROM mytable
     Will only be as many rows as there are unique values in col -> only use when you have aggregate fxns in query
 
     4. HAVING
-    Discard rows taht don't satisfy contrain after applying group by clause
+    Discard rows that don't satisfy contraint after applying group by clause
     Includes aliases
 
     5. SELECT
@@ -152,17 +152,17 @@ group by director;
 
 -- find total domestic, international sales attributed to each director
 -- we want to find the sum of both domestic and international sales corresponding to each director for all the movies they have directed
--- we know we will have to perform (only on sqlbolt) left join between movies and boxoffice (from movies m) m.id (left join boxoffice bo) == b.movie_id
+-- we know we will have to perform (only on sqlbolt) left join between movies and boxoffice (from movies m) m.id (left join boxoffice bo) = b.movie_id
 -- then we need to use an aggregate function, sum() on the columns domestic, international sales, sum(domestic_sales) and sum(international_sales)
 /*
     select m.director, sum(bo.domestic_sales) as total_domestic, sum(bo.international_sales) as total_international
     from movies m
     left join boxoffice bo
-        on m.id == bo.movie_id
+        on m.id = bo.movie_id
     group by director
 */
 select m.director, sum(bo.International_sales+bo.Domestic_sales) as total_sales
 from movies m
 left join boxoffice bo
-    on m.id == bo.movie_id
+    on m.id = bo.movie_id
 group by director;

@@ -82,9 +82,13 @@ ADD column DataType OptionalTableConstraint
 ALTER TABLE mytable
 DROP col_to_delete;
 
--- rename cols
+-- rename table
 ALTER TABLE mytable
 RENAME TO new_table_name;
+
+-- rename col
+alter table mytable
+RENAME column prev to new;
 
 -- exercise 17
 -- add col 'aspect_ratio' with float type

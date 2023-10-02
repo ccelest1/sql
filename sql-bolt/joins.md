@@ -41,7 +41,7 @@ where departments.employee_id is not null
 ```sql
 select * from employees
 right join employees
-    on employees.name == department.employee_name
+    on employees.name = department.employee_name
 where employees.department is not null
 ```
 ## Full Join
@@ -52,10 +52,10 @@ where employees.department is not null
 ### Example
 - if there is a list of products, list of reviews -> full join returns all products, corresponding reviews + reviews with no associated products, products with no reviews
 ```sql
--- on products.name == reviews.product_name
+-- on products.name = reviews.product_name
 select * from products
 full join reviews
-    on products.product_id == reviews.product_id
+    on products.product_id = reviews.product_id
 ```
 ## Self Join
 - want to combine rows from single table based on related column in table -> performed when table contains hierarchical or structured data and req to establish relationships between rows in same table
