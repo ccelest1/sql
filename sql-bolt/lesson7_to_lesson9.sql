@@ -101,4 +101,4 @@ join movies
 
 --- 3. movies with even years
 select * from movies
-where year%2==0;
+where year%2=0;
